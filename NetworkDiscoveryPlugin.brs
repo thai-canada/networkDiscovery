@@ -61,28 +61,26 @@ Function NetworkDiscoveryPlugin_ProcessEvent(event As Object) As Boolean
 
                 ' Extract the payload data dictionary
                 data = msg.GetData()
-                if data <> invalid then
+                if data <> invalid ang type(data) = "roAssociativeArray" then
 
-                    if type(data) = "roAssociativeArray" then
+                    'm.systemLog.SendLine("------------------------ " + FormatJson(data))
+                    '{"address":"192.168.1.145","domain":"local","host_name":"BrightSign-USD39X001946.local","name":"BRIGHTSIGN-LWS-SERVICE","protocol":"IPv4","txt":{"functionality":"content","serialnumber":"USD39X001946","unitdescription":"Sherwood","unitname":"XT1145 (145)","unitnamingmethod":"unitNameOnly"},"type":"_http._tcp"}
 
-                        'm.systemLog.SendLine("------------------------ " + FormatJson(data))
-                        '{"address":"192.168.1.145","domain":"local","host_name":"BrightSign-USD39X001946.local","name":"BRIGHTSIGN-LWS-SERVICE","protocol":"IPv4","txt":{"functionality":"content","serialnumber":"USD39X001946","unitdescription":"Sherwood","unitname":"XT1145 (145)","unitnamingmethod":"unitNameOnly"},"type":"_http._tcp"}
+                     m.systemLog.SendLine("------------------ NetworkDiscoveryPlugin: Player Found!")
+                     m.systemLog.SendLine("----- Name:       " + data["name"])
 
-                         m.systemLog.SendLine("------------------ NetworkDiscoveryPlugin: Player Found!")
-                         m.systemLog.SendLine("----- Name:       " + data["name"])
-    
-                         if (left(data["name"], 10) = "BRIGHTSIGN") then
-                             m.systemLog.SendLine("----- IP Address: " + data["address"])
-    
-                             if data["txt"]["serialnumber"] <> invalid then
-                                 m.systemLog.SendLine("----- Serial:     " + data["txt"]["serialnumber"])
-                             end if
-                             if data["txt"]["unitname"] <> invalid then
-                                 m.systemLog.SendLine("----- Unit Name:  " + data["txt"]["unitname"])
-                             end if
-                             m.systemLog.SendLine("----- Hostname:   " + data["host_name"])
+                     if (left(data["name"], 10) = "BRIGHTSIGN") then
+                         m.systemLog.SendLine("----- IP Address: " + data["address"])
+
+                         if data["txt"]["serialnumber"] <> invalid then
+                             m.systemLog.SendLine("----- Serial:     " + data["txt"]["serialnumber"])
                          end if
-                    end if
+                         if data["txt"]["unitname"] <> invalid then
+                             m.systemLog.SendLine("----- Unit Name:  " + data["txt"]["unitname"])
+                         end if
+                         m.systemLog.SendLine("----- Hostname:   " + data["host_name"])
+                     end if
+
                 end if
                 retval = true
                 
