@@ -61,7 +61,7 @@ Function NetworkDiscoveryPlugin_ProcessEvent(event As Object) As Boolean
 
                 ' Extract the payload data dictionary
                 data = msg.GetData()
-                if data <> invalid ang type(data) = "roAssociativeArray" then
+                if data <> invalid and type(data) = "roAssociativeArray" then
 
                     'm.systemLog.SendLine("------------------------ " + FormatJson(data))
                     '{"address":"192.168.1.145","domain":"local","host_name":"BrightSign-USD39X001946.local","name":"BRIGHTSIGN-LWS-SERVICE","protocol":"IPv4","txt":{"functionality":"content","serialnumber":"USD39X001946","unitdescription":"Sherwood","unitname":"XT1145 (145)","unitnamingmethod":"unitNameOnly"},"type":"_http._tcp"}
