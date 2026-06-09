@@ -1,5 +1,5 @@
 
-
+'plugin name: NetworkDiscoveryPlugin
 
 Function NetworkDiscoveryPlugin_Initialize(msgPort As Object, userVariables As Object, bsp As Object) As Object
     
@@ -69,17 +69,17 @@ Function NetworkDiscoveryPlugin_ProcessEvent(event As Object) As Boolean
                      m.systemLog.SendLine("------------------ NetworkDiscoveryPlugin: Player Found!")
                      m.systemLog.SendLine("----- Name:       " + data["name"])
 
-                     if (left(data["name"], 10) = "BRIGHTSIGN") then
-                         m.systemLog.SendLine("----- IP Address: " + data["address"])
+                    if (left(data["name"], 10) = "BRIGHTSIGN") then
+                        m.systemLog.SendLine("----- IP Address: " + data["address"])
 
-                         if data["txt"]["serialnumber"] <> invalid then
-                             m.systemLog.SendLine("----- Serial:     " + data["txt"]["serialnumber"])
-                         end if
-                         if data["txt"]["unitname"] <> invalid then
-                             m.systemLog.SendLine("----- Unit Name:  " + data["txt"]["unitname"])
-                         end if
-                         m.systemLog.SendLine("----- Hostname:   " + data["host_name"])
-                     end if
+                        if data["txt"]["serialnumber"] <> invalid then
+                            m.systemLog.SendLine("----- Serial:     " + data["txt"]["serialnumber"])
+                        end if
+                        if data["txt"]["unitname"] <> invalid then
+                            m.systemLog.SendLine("----- Unit Name:  " + data["txt"]["unitname"])
+                        end if
+                        m.systemLog.SendLine("----- Hostname:   " + data["host_name"])
+                    end if
 
                 end if
                 retval = true
@@ -100,7 +100,7 @@ Function NetworkDiscoveryPlugin_ProcessEvent(event As Object) As Boolean
             msg = m.discoveryPort.GetMessage()
         end while
         
-        ' RESTART TIMER: if you need repeated checks uncomment the line below.
+        ' RESTART TIMER: if you need repeated to check, uncomment the line below.
         ' m.timer.Start()
         ' Otherwise, the plugin will only process discovery events that arrive within the first 1 second.
 
